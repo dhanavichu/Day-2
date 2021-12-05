@@ -1,0 +1,414 @@
+1.
+Item.java
+
+package com.fest;
+
+public class ItemType {
+
+	private String name;
+	private double costPerDay;
+	private double deposit;
+	
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public double getCostPerDay() {
+		return costPerDay;
+	}
+	public void setCostPerDay(double costPerDay) {
+		this.costPerDay = costPerDay;
+	}
+	public double getDeposit() {
+		return deposit;
+	}
+	public void setDeposit(double deposit) {
+		this.deposit = deposit;
+	}
+	
+   public void display()
+   {
+   System.out.println("Item type details");
+   System.out.println("Name :"+getName());
+   System.out.println("CostPerDay :"+getCostPerDay());
+   System.out.println("Deposit :"+getDeposit());
+   
+	}
+
+
+}
+
+
+Main.java
+
+package com.fest;
+
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		ItemType i=new ItemType();
+		System.out.println("Enter the item type name:");
+		i.setName(sc.next());
+		System.out.println("Enter the cost per day:");
+		
+		i.setCostPerDay(sc.nextDouble());
+		System.out.println("Enter the Deposit:");
+		
+		i.setDeposit(sc.nextDouble());
+		i.display();
+	}
+
+}
+
+
+2.
+Customer.java
+
+package com.cust;
+
+import java.util.Scanner;
+
+public class Customer {
+
+	private String customerName;
+	private String customerEmail;
+	private String customerType;
+	private String customerLocation;
+	
+
+	public Customer(String customerName, String customerEmail, String customerType, String customerLocation) {
+		super();
+		this.customerName = customerName;
+		this.customerEmail = customerEmail;
+		this.customerType = customerType;
+		this.customerLocation=customerLocation;
+		
+		
+	}
+	
+	public void display()
+	{
+		System.out.println("Name:"+this.customerName);
+		System.out.println("Email:"+this.customerEmail);
+		System.out.println("Type:"+this.customerType);
+		System.out.println("Location:"+this.customerLocation);
+	}
+	
+	
+	 public static void main(String[] args) {
+		
+		 Scanner sc=new Scanner(System.in);
+		 System.out.println("Enter the Customer Details ");
+		 System.out.println("Enter the name");
+		 String customerName=sc.next();
+		 System.out.println("Enter the email");
+		 String customerEmail=sc.next();
+		 System.out.println("Enter the Type");
+		 String customerType=sc.next();
+		 System.out.println("Enter the location");
+		 String customerLocation=sc.next();
+		 
+		 Customer c=new Customer(customerName,customerEmail,customerType,customerLocation);
+		 c.display();
+		
+		 
+	}
+	
+	
+	
+	
+}
+
+
+
+
+3.
+Customer.java
+
+package com.four;
+
+import java.util.Objects;
+public class Customer {
+private String name;
+private Address address;
+
+public Customer() {
+}
+
+public Customer(String name, Address address) {
+this.name = name;
+this.address = address;
+}
+
+public String getName() {
+return name;
+}
+
+public void setName(String name) {
+this.name = name;
+}
+
+public Address getAddress() {
+return address;
+}
+
+public void setAddress(Address address) {
+this.address = address;
+}
+
+@Override
+public boolean equals(Object obj) {
+if (this == obj) {
+return true;
+}
+
+if (obj == null) {
+return false;
+}
+
+if (getClass() != obj.getClass()) {
+return false;
+}
+
+Customer other = (Customer) obj;
+return Objects.equals(name, other.name) && this.address.equals(other.getAddress());
+}
+
+@Override
+public String toString() {
+return "Name:" + name + "\nAddress:" + address.getStreet() + "," + address.getCity() + "-"
++ address.getPincode();
+}
+
+}
+
+
+
+Address.java
+
+package com.four;
+import java.util.Objects;
+public class Address {
+	private String street;
+	private String city;
+	private Integer pincode;
+
+	public Address() {
+	}
+
+	public Address(String street, String city, Integer pincode) {
+	this.street = street;
+	this.city = city;
+	this.pincode = pincode;
+	}
+
+	public String getStreet() {
+	return street;
+	}
+
+	public void setStreet(String street) {
+	this.street = street;
+	}
+
+	public String getCity() {
+	return city;
+	}
+
+	public void setCity(String city) {
+	this.city = city;
+	}
+
+	public Integer getPincode() {
+	return pincode;
+	}
+
+	public void setPincode(Integer pincode) {
+	this.pincode = pincode;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+	if (this == obj) {
+	return true;
+	}
+	if (obj == null) {
+	return false;
+	}
+	if (getClass() != obj.getClass()) {
+	return false;
+	}
+	Address other = (Address) obj;
+	return Objects.equals(city, other.city) && Objects.equals(pincode, other.pincode)
+	&& Objects.equals(street, other.street);
+	}
+
+	@Override
+	public String toString() {
+	return (street + "," + city + "-" + pincode);
+	}
+
+	}
+
+
+
+
+Main.java
+
+package com.four;
+
+
+import java.util.Scanner;
+
+public class Main {
+public static void main(String[] args) {
+Customer[] cust = null, dc = null;
+Customer cust1 = null;
+Address address = null;
+int cc = 0, i = 0, dcc = 0;
+
+   Scanner sc = new Scanner(System.in);
+cust = new Customer[100];
+dc = new Customer[100];
+
+System.out.println("Enter the number of customers");
+cc = sc.nextInt();
+
+do {
+cust1 = new Customer();
+address = new Address();
+
+System.out.printf("Enter the Customer Details %d \n", i + 1);
+System.out.println("Enter the name");
+cust1.setName(sc.next());
+
+System.out.println("Enter the street");
+address.setStreet(sc.next());
+
+System.out.println("Enter the city");
+address.setCity(sc.next());
+System.out.println("Enter the pincode");
+address.setPincode(sc.nextInt());
+
+cust1.setAddress(address);
+cust[i] = cust1;
+} while (++i < cc);
+
+for (i = 0; i < cc; i++) {
+for (int j = i + 1; j < cc; j++) {
+if (cust[i].equals(cust[j])) {
+dc[dcc++] = cust[i];
+}
+
+}
+}
+
+if (dc[0] == null) {
+System.out.println("No duplicate details");
+} else {
+System.out.println("The identical Customers Details:");
+
+for (i = 0; i < dcc; i++) {
+System.out.println((i + 1) + ")" + dc[i]);
+}
+}
+}
+}
+
+
+4.
+Address.java
+
+
+public class Address {
+	
+	
+	private String street;
+	private String city;
+	private int pincode;
+	
+	public Address() {
+		super();
+	}
+
+	public Address(String street, String city, int pincode) {
+		super();
+		this.street = street;
+		this.city = city;
+		this.pincode = pincode;
+	}
+	
+	@Override
+	public String toString() {
+		return (street+","+city+"-"+pincode);
+	}
+
+	
+
+}
+
+
+Customer.java
+
+
+public class Customer {
+
+	private String name;
+	private Address address;
+
+	public Customer() {
+		super();
+	}
+
+	public Customer(String name, Address address) {
+		super();
+		this.name = name;
+		this.address = address;
+	}
+
+	@Override
+	public String toString() {
+		
+		return (name +","+ address);
+	}
+
+	
+	
+
+
+	}
+	
+
+Main.java
+
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		String address;
+		Scanner sc=new Scanner(System.in);
+		System.out.println("enter the name");
+		String name=sc.next();
+		System.out.println("enter the address details");
+		System.out.println("enter the street");
+		String street=sc.next();
+		System.out.println("enter the city");
+		String city=sc.next();
+		System.out.println("enter the pincode");
+		int pincode=sc.nextInt();
+		Address a=new Address(street,city,pincode);
+		Customer c=new Customer(name,a);
+		String cd=c.toString();
+		System.out.println(cd);
+		}
+		
+
+	}
+
+
