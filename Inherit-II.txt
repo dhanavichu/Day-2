@@ -1,0 +1,272 @@
+Event.java
+
+package inherit;
+
+public class Event {
+      public String name;
+      public String detail;
+      public String type;
+      public String ownerName;
+      public double costPerDay;
+      
+      
+	
+	public Event(String name, String detail, String type, String ownerName, double costPerDay) {
+		super();
+		this.name = name;
+		this.detail = detail;
+		this.type = type;
+		this.ownerName = ownerName;
+		this.costPerDay = costPerDay;
+	}
+	
+	
+	public Event() {
+		super();
+		
+	}
+
+
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDetail() {
+		return detail;
+	}
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getOwnerName() {
+		return ownerName;
+	}
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
+	}
+	public double getCostPerDay() {
+		return costPerDay;
+	}
+	public void setCostPerDay(double costPerDay) {
+		this.costPerDay = costPerDay;
+	}
+      
+      
+      
+	
+}
+
+Exhibition.java
+package inherit;
+
+public class Exhibition extends Event {
+
+	public int noOfStall;
+
+	
+	public Exhibition(String name, String detail, String type, String ownerName, double costPerDay, int noOfStall) {
+		super(name, detail, type, ownerName, costPerDay);
+		this.noOfStall = noOfStall;
+	}
+
+	public Exhibition() {
+		super();
+		// TODO Auto-generated constructor stub
+
+	}
+	public int getNoOfStall() {
+		return noOfStall;
+	}
+
+	public void setNoOfStall(int noOfStall) {
+		this.noOfStall = noOfStall;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDetail() {
+		return detail;
+	}
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getOwnerName() {
+		return ownerName;
+	}
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
+	}
+	public double getCostPerDay() {
+		return costPerDay;
+	}
+	public void setCostPerDay(double costPerDay) {
+		this.costPerDay = costPerDay;
+	}
+	
+}
+
+StageEvent.java
+
+package inherit;
+
+public class StageEvent extends Event {
+	
+	public StageEvent(String name, String detail, String type, String ownerName, double costPerDay,int noOfSeats) {
+		super(name, detail, type, ownerName, costPerDay);
+		this.noOfSeats=noOfSeats;
+	}
+
+	
+	
+	public StageEvent() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+	public int noOfSeats;
+
+	public int getNoOfSeats() {
+		return noOfSeats;
+	}
+
+	public void setNoOfSeats(int noOfSeats) {
+		this.noOfSeats = noOfSeats;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDetail() {
+		return detail;
+	}
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getOwnerName() {
+		return ownerName;
+	}
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
+	}
+	public double getCostPerDay() {
+		return costPerDay;
+	}
+	public void setCostPerDay(double costPerDay) {
+		this.costPerDay = costPerDay;
+	}
+
+}
+
+
+Main.java
+
+package inherit;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
+
+public class Main {
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		Scanner sc=new Scanner(System.in);
+		Exhibition exhibt=new Exhibition();
+		StageEvent stageeve=new StageEvent();
+		String[] exhibition,stageevent;
+		BufferedReader b = new BufferedReader(
+	            new InputStreamReader(System.in));
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		String date,end=null;
+		long diffinMilles,difference;
+		Double cost,gst;
+		Date startdate=null;
+		Date enddate=null;
+		System.out.println("Enter your choice:");
+		System.out.println("1.Exhibition event\r\n" + 
+				"2.Stage event");
+		int choice=sc.nextInt();
+		switch(choice) {
+		case 1:System.out.println("Enter the details of exhibition:");
+		exhibition = b.readLine().split(",");
+		exhibt.setCostPerDay(Double.parseDouble(exhibition[4]));
+		exhibt.setNoOfStall(Integer.parseInt(exhibition[5]));
+		System.out.println("Enter the starting date of the event:");
+		date = sc.next();
+		System.out.println("Enter the ending date of the event:");
+		end = sc.next();
+		try {
+		    //Parsing the String
+		    startdate = dateFormat.parse(date);
+		    enddate = dateFormat.parse(end);   
+		} catch (ParseException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}
+		diffinMilles=(enddate.getTime())-(startdate.getTime());
+		difference=TimeUnit.DAYS.convert(diffinMilles, TimeUnit.MILLISECONDS);
+		cost=exhibt.getCostPerDay()*difference;
+		gst=cost*(0.005*exhibt.getNoOfStall());
+		System.out.println("The GST to be paid is Rs."+gst);
+		break;
+		case 2:System.out.println("Enter the details of stage event:");
+		stageevent = b.readLine().split(",");
+		stageeve.setCostPerDay(Double.parseDouble(stageevent[4]));
+		stageeve.setNoOfSeats(Integer.parseInt(stageevent[5]));
+		System.out.println("Enter the starting date of the event:");
+		date = sc.next();
+		System.out.println("Enter the ending date of the event:");
+		end = sc.next();
+		try {
+		   
+		    startdate = dateFormat.parse(date);
+		    enddate = dateFormat.parse(end);   
+		} catch (ParseException e) {
+		   
+		    e.printStackTrace();
+		}
+		diffinMilles=(enddate.getTime())-(startdate.getTime());
+		difference=TimeUnit.DAYS.convert(diffinMilles, TimeUnit.MILLISECONDS);
+		cost=stageeve.getCostPerDay()*difference;
+		gst=cost*(0.15*stageeve.getNoOfSeats());
+		System.out.println("The GST to be paid is Rs."+gst);
+		break;
+
+	}
+
+}
+	
+}

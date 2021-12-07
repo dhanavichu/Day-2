@@ -1,0 +1,171 @@
+Account.java
+
+package bank;
+
+public class Account {
+protected String accName;
+protected String accNo;
+protected String bankName;
+public String getAccName() {
+	return accName;
+}
+public void setAccName(String accName) {
+	this.accName = accName;
+}
+public String getAccNo() {
+	return accNo;
+}
+public void setAccNo(String accNo) {
+	this.accNo = accNo;
+}
+public String getBankName() {
+	return bankName;
+}
+public void setBankName(String bankName) {
+	this.bankName = bankName;
+}
+
+protected void display()
+{
+	System.out.println( "Account Name:" + accName + "\nAccount Number:" + accNo + ",\nBank Name:" + bankName);
+}
+}
+
+
+currentAccount.java
+
+package bank;
+
+public class CurrentAccount extends Account{
+private String tinNumber;
+
+public CurrentAccount() {
+	super();
+	// TODO Auto-generated constructor stub
+}
+
+public CurrentAccount(String accName,String accNo,String bankName,String tinNumber) {
+	this.accName=accName;
+	this.accNo=accNo;
+	this.bankName=bankName;
+	this.tinNumber = tinNumber;
+	
+}
+
+public String getTinNumber() {
+	return tinNumber;
+}
+
+public String getAccName() {
+	return accName;
+}
+public void setAccName(String accName) {
+	this.accName = accName;
+}
+public String getAccNo() {
+	return accNo;
+}
+public void setAccNo(String accNo) {
+	this.accNo = accNo;
+}
+public String getBankName() {
+	return bankName;
+}
+public void setBankName(String bankName) {
+	this.bankName = bankName;
+}
+public void setTinNumber(String tinNumber) {
+	this.tinNumber = tinNumber;
+}
+public void display()
+{
+	super.display();
+	System.out.println("TIN Number:"+tinNumber);
+}
+
+
+
+}
+
+SavingAccount.java
+
+package bank;
+
+public class SavingAccount extends Account {
+	
+	private String orgName;
+
+	public SavingAccount() {
+		super();
+	}
+
+	public SavingAccount(String accName,String accNo,String bankName,String orgName) {
+		this.accName=accName;
+		this.accNo=accNo;
+		this.bankName=bankName;
+		this.orgName = orgName;
+	}
+	
+	
+	
+	public String getOrgName() {
+		return orgName;
+	}
+
+	public void setOrgName(String orgName) {
+		this.orgName = orgName;
+	}
+
+	public void display()
+	{
+		super.display();
+		System.out.println("Organisation Name:"+orgName);
+	}
+}
+
+
+Main.java
+package bank;
+
+import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		Scanner sc=new Scanner(System.in);
+		BufferedReader bi = new BufferedReader(
+	            new InputStreamReader(System.in));
+		String[] savingsaccount,currentaccount;
+		//Account a=new Account();
+		SavingAccount saveAcc=new SavingAccount();
+		CurrentAccount currAcc=new CurrentAccount();
+		System.out.println("Choose Account Type");
+		System.out.println("1.Savings Account\r\n" + 
+				"2.Current Account");
+		int choice=sc.nextInt();
+		switch(choice) {
+		case 1:System.out.println("Enter Account details in comma separated(Account Name,Account Number,Bank Name,Organisation Name)");
+		savingsaccount = bi.readLine().split(",");
+		saveAcc.setAccName(savingsaccount[0]);
+		saveAcc.setAccNo(savingsaccount[1]);
+		saveAcc.setBankName(savingsaccount[2]);
+		saveAcc.setOrgName(savingsaccount[3]);
+		saveAcc.display();
+		break;
+		case 2:System.out.println("Enter Account details in comma separated(Account Name,Account Number,Bank Name,TIN Number)");
+		currentaccount = bi.readLine().split(",");
+		currAcc.setAccName(currentaccount[0]);
+		currAcc.setAccNo(currentaccount[1]);
+		currAcc.setBankName(currentaccount[2]);
+		currAcc.setTinNumber(currentaccount[3]);
+		currAcc.display();
+		}
+		}
+		
+		
+
+	}
